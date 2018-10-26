@@ -1,0 +1,4 @@
+php -S [::0]:8000 -t public
+bin/console debug:router
+bin/console doctrine:schema:update --force
+bin/console doctrine:fixtures:load
