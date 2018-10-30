@@ -4,22 +4,43 @@
 
 {% block body %}
     <h1>Liste des circuits</h1>
-
+    
+{% if is_granted('ROLE_ADMIN') %}
+    
     <table class="table">
         <thead>
             <tr>
                 <th>Id</th>
-                <th>...</th>
+                <th>Description</th>
+                <th>PaysDepart</th>
+                <th>VilleDepart</th>
+                <th>VilleArrivee</th>
+                <th>DureeCircuit</th>
+                <th>actions</th>
+                <th>programmés?</th>
             </tr>
         </thead>
-        <tbody>
         {% for circuit in circuits %}
             <tr>
                 <td>{{ circuit.id }}</td>
-                <td>...</td>
-		<td>{{ circuit.description }}</td>
-		<td>...</td>
-		<td><a href="{{ path('front_circuit_show', {id: circuit.id}) }}">détails</a></td>
+                <td>{{ circuit.description }}</td>
+                <td>{{ circuit.paysDepart }}</td>
+                <td>{{ circuit.villeDepart }}</td>
+                <td>{{ circuit.villeArrivee }}</td>
+                <td>{{ circuit.dureeCircuit }}</td>
+				<td>
+					<a href="{{ path('admin_circuit_show', {'id': circuit.id}) }}">show</a>
+                    <a href="{{ path('admin_circuit_edit', {'id': circuit.id}) }}">edit</a>
+				</td>
+				<td>
+				    {% if circuit.programmationCircuits.count == '1' %}
+				    	oui
+				    	<a href="{{ path('front_circuit_show', {id: circuit.id}) }}">détails</a>
+				    	
+				    {%  else %}
+				    	non
+				    {% endif %}
+				</td>
             </tr>
         {% else %}
             <tr>
@@ -28,5 +49,45 @@
         {% endfor %}
         </tbody>
     </table>
+
+{% else %}
+
+<table class="table">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Description</th>
+                <th>PaysDepart</th>
+                <th>VilleDepart</th>
+                <th>VilleArrivee</th>
+                <th>DureeCircuit</th>
+                <th>actions</th>
+            </tr>
+        </thead>
+        {% for circuit in circuitsp %}
+            <tr>
+                <td>{{ circuit.id }}</td>
+                <td>{{ circuit.description }}</td>
+                <td>{{ circuit.paysDepart }}</td>
+                <td>{{ circuit.villeDepart }}</td>
+                <td>{{ circuit.villeArrivee }}</td>
+                <td>{{ circuit.dureeCircuit }}</td>
+				<td>
+					<a href="{{ path('front_circuit_show', {id: circuit.id}) }}">détails</a>
+				</td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="2">no circuits found</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+{% endif %}
+
+
+
+
 
 {% endblock %} {# body #}

@@ -16,6 +16,7 @@ class FrontofficeHomeController extends AbstractController
     public function index()
     {
         $em = $this->getDoctrine()->getManager();
+        $circuits=$em->getRepository(Circuit::class)->findAll();
         
         $circuitp = [];
         
@@ -26,7 +27,8 @@ class FrontofficeHomeController extends AbstractController
         }
         dump($circuitp);
         return $this->render('front/home.html.twig', [
-            'circuits' => $circuitp,
+            'circuitsp' => $circuitp,
+            'circuits' => $circuits,
         ]);
     }
     /**

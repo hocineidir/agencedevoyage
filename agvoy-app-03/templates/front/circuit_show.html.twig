@@ -29,12 +29,12 @@
   {%  for etape in circuit.etapes %}
   <tr>
     <td>{{ etape.numeroEtape }}</td>
-    <td>...</td>
+    <td>{{ dump(circuit.programmationCircuits) }}</td>
   </tr>
   {% endfor %} {# etapes #}
 </table>
 
-{{ dump(circuit) }}
+
 
 <a href="{{ path('frontoffice_home') }}">retour à l'accueil</a>
 {% endblock %} {# body #}
