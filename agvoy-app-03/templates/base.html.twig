@@ -10,7 +10,10 @@
     </head>
     <body>
         {% block body %}
-	{% block menu %}{% endblock %} {# menu #}
+	{% block menu %}
+	{{ knp_menu_render('main', {'currentClass': 'active'}) }}
+	{{ knp_menu_render('user', {'currentClass': 'active'}) }}
+	{% endblock %} {# menu #}
 
     {% block main %}MAIN{% endblock %} {# main #}
 
