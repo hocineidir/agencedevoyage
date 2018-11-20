@@ -48,8 +48,15 @@ class FrontofficeHomeController extends AbstractController
         
         dump($circuit);
         
+        $likes = $this->get('session')->get('likes');
+        
+        if ($likes == null) {
+            $likes = [];
+        }
+        
         return $this->render('front/circuit_show.html.twig', [
             'circuit' => $circuit,
+            'likes' => $likes,
         ]);
     }
     /**
@@ -57,7 +64,7 @@ class FrontofficeHomeController extends AbstractController
      *
      * @Route("/likes/{id}", name="likes")
      */
-    public function Likeshow($id) {
+    public function likeshow($id) {
         $em = $this->getDoctrine()->getManager();
         
         $circuit = $em->getRepository(Circuit::class)->find($id);
@@ -65,15 +72,13 @@ class FrontofficeHomeController extends AbstractController
         $likes = $this->get('session')->get('likes');
         
         if (! in_array($id, $likes)) {
-            $likes = $id;
+            $likes[] = $id;
         }
         else {
             $likes = array_diff($likes, array($id));
         }
         
-        return $this->render('front/circuit_show.html.twig', [
-            
-        ]);
+        return $this->redirectToRoute('front_circuit_show', ['id => $id']);
         
     }
         

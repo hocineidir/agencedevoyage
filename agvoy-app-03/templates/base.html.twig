@@ -10,10 +10,12 @@
     </head>
     <body>
         {% block body %}
-	{% block menu %}
-	{{ knp_menu_render('main', {'currentClass': 'active'}) }}
-	{{ knp_menu_render('user', {'currentClass': 'active'}) }}
-	{% endblock %} {# menu #}
+    <header>
+	    {% block menu %}
+	    {{ knp_menu_render('main', {'currentClass': 'active'}) }}
+	    {{ knp_menu_render('user', {'currentClass': 'active'}) }}
+	    {% endblock %} {# menu #}
+	</header>
 
     {% block main %}MAIN{% endblock %} {# main #}
 

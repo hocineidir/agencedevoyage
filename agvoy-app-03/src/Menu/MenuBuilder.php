@@ -47,9 +47,11 @@ class MenuBuilder
             // Get username of the current logged in user
             $username = $this->container->get('security.token_storage')->getToken()->getUser()->getUsername();
             $label = 'Hi '. $username;
-            $menu->addChild('Circuits', array('route' => 'admin_circuit_index'));
-            $menu->addChild('Etapes', array('route' => 'admin_etape_index'));
             
+            if($this->container->get('security.authorization_checker')->isGranted('ROLE_ADMIN')) {
+                $menu->addChild('Circuits', array('route' => 'admin_circuit_index'));
+                $menu->addChild('Etapes', array('route' => 'admin_etape_index'));
+            }
         }
         else 
        {
