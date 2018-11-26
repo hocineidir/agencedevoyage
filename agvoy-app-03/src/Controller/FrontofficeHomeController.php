@@ -25,10 +25,19 @@ class FrontofficeHomeController extends AbstractController
                 array_push($circuitp, $circuit);
             }
         }
-        dump($circuitp);
+        
+        if ( $this->get('session')->has('likes') ) {
+            $likes = $this->get('session')->get('likes');
+        }
+        else {
+            $likes = [];
+        }
+        
+        
         return $this->render('front/home.html.twig', [
             'circuitsp' => $circuitp,
             'circuits' => $circuits,
+            'likes' => $likes
         ]);
     }
     /**
@@ -46,11 +55,10 @@ class FrontofficeHomeController extends AbstractController
             $circuit=null;
         }
         
-        dump($circuit);
-        
-        $likes = $this->get('session')->get('likes');
-        
-        if ($likes == null) {
+        if ( $this->get('session')->has('likes') ) {
+            $likes = $this->get('session')->get('likes');
+        }
+        else {
             $likes = [];
         }
         
@@ -62,14 +70,19 @@ class FrontofficeHomeController extends AbstractController
     /**
      * Finds and save likes.
      *
-     * @Route("/likes/{id}", name="likes")
+     * @Route("/circuit/likes/{id}", name="likes")
      */
-    public function likeshow($id) {
+    public function likeShow($id) {
         $em = $this->getDoctrine()->getManager();
         
         $circuit = $em->getRepository(Circuit::class)->find($id);
         
-        $likes = $this->get('session')->get('likes');
+        if ( $this->get('session')->has('likes') ) {
+            $likes = $this->get('session')->get('likes');
+        }
+        else {
+            $likes = [];
+        }
         
         if (! in_array($id, $likes)) {
             $likes[] = $id;
@@ -78,7 +91,13 @@ class FrontofficeHomeController extends AbstractController
             $likes = array_diff($likes, array($id));
         }
         
-        return $this->redirectToRoute('front_circuit_show', ['id => $id']);
+        dump($likes);
+        $this->get('session')->set('likes', $likes);
+        
+        return $this->render('front/circuit_show.html.twig', [
+            'circuit' => $circuit,
+            'id' => $id, 
+            'likes' => $likes]);
         
     }
         

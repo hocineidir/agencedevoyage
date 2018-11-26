@@ -5,6 +5,8 @@
 {% block main %}
     <h1>Liste des circuits</h1>
     
+{{ dump(likes) }}
+    
 {% if is_granted('ROLE_ADMIN') %}
     
     <table class="table">
@@ -64,9 +66,10 @@
                 <th>VilleDepart</th>
                 <th>VilleArrivee</th>
                 <th>DureeCircuit</th>
-                <th>actions</th>
+                <th>Actions</th>
             </tr>
         </thead>
+        <tbody>
         {% for circuit in circuitsp %}
             <tr>
                 <td>{{ circuit.id }}</td>
@@ -76,7 +79,7 @@
                 <td>{{ circuit.villeArrivee }}</td>
                 <td>{{ circuit.dureeCircuit }}</td>
 				<td>
-					<a href="{{ path('front_circuit_show', {id: circuit.id}) }}">détails</a>
+					<a href="{{ path('front_circuit_show', {id: circuit.id}) }}">Détails</a>
 				</td>
             </tr>
         {% else %}

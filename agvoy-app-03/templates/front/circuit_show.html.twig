@@ -3,35 +3,57 @@
 {% block title %}Hello !{% endblock %}
 
 {% block main %}
-   <h1>Circuit {{circuit.id}}</h1>
+   <h1>Circuit <b>{{circuit.description}}</b></h1>
+   
+{{ dump(likes) }}
+   
+   
+<div>
+{% if circuit.id in likes %}
+	<a href="{{ path('likes', {id: circuit.id}) }}">Retirer</a>
+{% else %}
+	<a href="{{ path('likes', {id: circuit.id}) }}">Ajouter</a>
+{% endif %}
 
-<table class="table">
+
+<table class="table table-bordered table-sm">
+    <thead>
+        <tr>
+            <th>Date de départ</th>
+            <th>Participants</th>
+            <th>Prix</th>
+        </tr>
+    </thead>
     <tbody>
+    {% for item in circuit.programmationCircuits %}
         <tr>
-            <th>Id</th>
-            <td>{{ circuit.id }}</td>
+            <td>{{ item.dateDepart|date('Y-m-d') }}</td>
+            <td>{{ item.nombrePersonnes }}</td>
+            <td>{{ item.prix }}€</td>
         </tr>
-        <tr>
-            <th>...</th>
-            <td>...</td>
-        </tr>
+    {% endfor %}
     </tbody>
 </table>
 
-<table>
+<h1>Etapes</h1>
+
+<table class="table table-bordered table-sm">
   <thead>
     <tr>
-             <th>Numéro</th>
-        <th>...</th>
+        <th>Numéro</th>
+        <th>Ville</th>
+        <th>Durée (en jours)</th>
     </tr>
   </thead>
-
+  <tbody>
   {%  for etape in circuit.etapes %}
   <tr>
     <td>{{ etape.numeroEtape }}</td>
-    <td>{{ dump(circuit.programmationCircuits) }}</td>
+    <td>{{ etape.villeEtape }}</td>
+    <td>{{ etape.nombrejours }}</td>
   </tr>
   {% endfor %} {# etapes #}
+  </tbody>
 </table>
 
 
