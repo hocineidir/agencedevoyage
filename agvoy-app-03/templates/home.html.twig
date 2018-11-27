@@ -4,13 +4,46 @@
 
 {% extends "base.html.twig" %}
 
-{% block title %}{{ parent() }} - Welcome{% endblock %}
+{% block title %}VoyagINT{% endblock %}
 
 {% block main %}
+<div class='jumbotron'>
+	<h1 class='text-center'>Bienvenue sur VoyagINT!</h1>
+	<p></p>
+</div>
 
-<h1>Welcome</h1>
+<div class="row">
 
-<p>{{ welcome }}</p>
+            <div class="col-lg-6 col-md-6 mb-6">
+              <div class="card h-100">
+                <a href="#"><img class="card-img-top" src="https://static.service-voyages.com/photos/circuit-andalousie/malaga/grenade_359201_pgbighd.jpg" alt=""></a>
+                <div class="card-body">
+                  <h4 class="card-title">
+                    <a href="http://localhost:8000/home">Andalousie</a>
+                  </h4>
+                  <h5>500€</h5>
+                </div>
+                <div class="card-footer">
+                  <small class="text-muted">&#9733; &#9733; &#9733; &#9733; &#9734;</small>
+                </div>
+              </div>
+            </div>
+
+            <div class="col-lg-6 col-md-6 mb-6">
+              <div class="card h-100">
+                <a href="http://localhost:8000/home"><img class="card-img-top" src="https://www.toureiffel.paris/themes/custom/tour_eiffel/img/poster-tour-eiffel-jour-nuit.jpg" alt=""></a>
+                <div class="card-body">
+                  <h4 class="card-title">
+                    <a href="http://localhost:8000/home">Ile-de-France</a>
+                  </h4>
+                  <h5>700€</h5>
+                </div>
+                <div class="card-footer">
+                  <small class="text-muted">&#9733; &#9733; &#9733; &#9733; &#9734;</small>
+                </div>
+              </div>
+            </div>
+
 
 {% endblock %} {# main #}
 

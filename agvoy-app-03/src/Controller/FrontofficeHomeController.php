@@ -33,7 +33,6 @@ class FrontofficeHomeController extends AbstractController
             $likes = [];
         }
         
-        
         return $this->render('front/home.html.twig', [
             'circuitsp' => $circuitp,
             'circuits' => $circuits,
@@ -91,8 +90,9 @@ class FrontofficeHomeController extends AbstractController
             $likes = array_diff($likes, array($id));
         }
         
-        dump($likes);
         $this->get('session')->set('likes', $likes);
+        $this->get('session')->getFlashBag()->add('message', 'La liste des circuits favoris a été mise à jour');
+        
         
         return $this->render('front/circuit_show.html.twig', [
             'circuit' => $circuit,

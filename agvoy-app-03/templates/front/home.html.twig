@@ -1,18 +1,16 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Hello !{% endblock %}
+{% block title %}Circuit{% endblock %}
 
 {% block main %}
     <h1>Liste des circuits</h1>
-    
-{{ dump(likes) }}
+   
     
 {% if is_granted('ROLE_ADMIN') %}
     
     <table class="table">
         <thead>
             <tr>
-                <th>Id</th>
                 <th>Description</th>
                 <th>PaysDepart</th>
                 <th>VilleDepart</th>
@@ -24,7 +22,6 @@
         </thead>
         {% for circuit in circuits %}
             <tr>
-                <td>{{ circuit.id }}</td>
                 <td>{{ circuit.description }}</td>
                 <td>{{ circuit.paysDepart }}</td>
                 <td>{{ circuit.villeDepart }}</td>
@@ -60,7 +57,6 @@
 <table class="table">
         <thead>
             <tr>
-                <th>Id</th>
                 <th>Description</th>
                 <th>PaysDepart</th>
                 <th>VilleDepart</th>
@@ -72,7 +68,6 @@
         <tbody>
         {% for circuit in circuitsp %}
             <tr>
-                <td>{{ circuit.id }}</td>
                 <td>{{ circuit.description }}</td>
                 <td>{{ circuit.paysDepart }}</td>
                 <td>{{ circuit.villeDepart }}</td>
@@ -91,9 +86,5 @@
     </table>
 
 {% endif %}
-
-
-
-
 
 {% endblock %} {# main #}
